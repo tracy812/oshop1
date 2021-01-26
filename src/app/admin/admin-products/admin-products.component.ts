@@ -15,7 +15,16 @@ export class AdminProductsComponent implements OnInit , OnDestroy {
 //  filterProducts:{title:string, price:string,key:any}[];
 products:any[];
 filterProducts:any[];
-  subscription:Subscription;
+subscription:Subscription;
+tableResources:DataTableResource<any>;
+items:any[];
+itemCount:number;
+
+private initalizleTable(products:any){
+  this.tableResources=new DataTableResource(products);
+  this.tableResources.query({offset:0}).then(items =>this.items=items)
+  this.tableResources.count().then(count=>this.itemCount=count)
+}
 
   constructor(private productService:ProductService) {
     //this.product$=this.productService.getAll().snapshotChanges()
@@ -29,13 +38,16 @@ filterProducts:any[];
     this.subscription=this.productService.getAll().snapshotChanges()
     .subscribe(products=>{products=products.map(c => ({ key: c.payload.key, ...c.payload.val() }));
     this.filterProducts=this.products=products;
+  //  this.initalizleTable(products);
     });
-
-
 
   
   }
 
+  reloadItems(parms){
+    this.tableResources.query(parms).then(items=>this.items=items)
+
+  }
   ngOnInit(): void {
   }
 
