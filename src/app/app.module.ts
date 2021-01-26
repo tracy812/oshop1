@@ -27,6 +27,7 @@ import { AuthGuardService } from './auth-guard.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { FormsModule } from '@angular/forms';
 import { CustomFormsModule} from 'ng2-validation';
+import { DataTableModule} from 'angular-4-data-table';
 const routes: Routes = [
   {path:'' , component:HomeComponent},
   {path:'products' , component:ProductsComponent},
@@ -53,7 +54,8 @@ const routes: Routes = [
     MyOrdersComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    DataTableModule
   ],
   imports: [
     BrowserModule,
