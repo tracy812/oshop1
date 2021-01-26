@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { CatagoryService } from './../../catagory.service';
 import { Component, OnInit } from '@angular/core';
 import 'rxjs/add/operator/take';
+import { compileDirectiveFromMetadata } from '@angular/compiler';
 
 @Component({
   selector: 'app-product-form',
@@ -46,6 +47,14 @@ export class ProductFormComponent implements OnInit {
      this.router.navigate(['/admin/products']);
   };
   
+  delete(){
+    if (!confirm('Are yoy sure to delete the product'))
+       return;
+    else{
+      this.productService.delete(this.id);
+    }
+    this.router.navigate(['/admin/products']);
+  }
   ngOnInit(): void {
   }
 
