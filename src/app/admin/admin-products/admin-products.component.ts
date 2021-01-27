@@ -16,15 +16,15 @@ export class AdminProductsComponent implements OnInit , OnDestroy {
 products:any[];
 filterProducts:any[];
 subscription:Subscription;
-tableResources:DataTableResource<any>;
+//tableResources:DataTableResource<any>;
 items:any[];
 itemCount:number;
 
-private initalizleTable(products:any){
-  this.tableResources=new DataTableResource(products);
-  this.tableResources.query({offset:0}).then(items =>this.items=items)
-  this.tableResources.count().then(count=>this.itemCount=count)
-}
+//private initalizleTable(products:any){
+//  this.tableResources=new DataTableResource(products);
+//  this.tableResources.query({offset:0}).then(items =>this.items=items)
+//  this.tableResources.count().then(count=>this.itemCount=count)
+//}
 
   constructor(private productService:ProductService) {
     //this.product$=this.productService.getAll().snapshotChanges()
@@ -44,10 +44,10 @@ private initalizleTable(products:any){
   
   }
 
-  reloadItems(parms){
-    this.tableResources.query(parms).then(items=>this.items=items)
-
-  }
+ // reloadItems(parms){
+ //   this.tableResources.query(parms).then(items=>this.items=items)
+ //
+ // }
   ngOnInit(): void {
   }
 

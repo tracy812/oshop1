@@ -28,7 +28,7 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
 import { FormsModule } from '@angular/forms';
 import { CustomFormsModule} from 'ng2-validation';
 const routes: Routes = [
-  {path:'' , component:HomeComponent},
+  {path:'' , component:ProductsComponent},
   {path:'products' , component:ProductsComponent},
   {path:'shopping-cart' , component:ShoppingCartComponent},
   {path:'check-out' , component:CheckOutComponent, canActivate:[AuthGuardService]} ,
@@ -54,6 +54,7 @@ const routes: Routes = [
     AdminProductsComponent,
     AdminOrdersComponent,
     ProductFormComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,
