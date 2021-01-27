@@ -26,7 +26,9 @@ import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AuthGuardService } from './auth-guard.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { FormsModule } from '@angular/forms';
-import { CustomFormsModule} from 'ng2-validation';
+import { ProductFilterComponent } from './products/product-filter/product-filter.component';
+import { ProductCardComponent } from './product-card/product-card.component';
+//import { CustomFormsModule} from 'ngx-custom-validators';
 const routes: Routes = [
   {path:'' , component:ProductsComponent},
   {path:'products' , component:ProductsComponent},
@@ -54,7 +56,9 @@ const routes: Routes = [
     AdminProductsComponent,
     AdminOrdersComponent,
     ProductFormComponent,
-    ProductsComponent
+    ProductsComponent,
+    ProductFilterComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,
@@ -63,8 +67,8 @@ const routes: Routes = [
     AngularFireAuthModule,
     RouterModule.forRoot(routes),
     NgbModule,
-    FormsModule,
-    CustomFormsModule
+    FormsModule
+    //CustomFormsModule
   ],
   providers: [
     AuthService,

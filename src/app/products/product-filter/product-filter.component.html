@@ -1,0 +1,8 @@
+<ul class="list-group">
+    <li routerLink="/" class="list-group-item" [class.active]="!catagory">All Categories</li>
+    <li *ngFor="let c of catagories$ | async " 
+    routerLink="/"
+    [queryParams]="{catagory: c.key}"
+    [class.active]="catagory===c.key"
+    class="list-group-item">{{c.name}}</li>
+</ul>

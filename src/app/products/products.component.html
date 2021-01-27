@@ -1,24 +1,13 @@
 <div class="row">
     <div class="col-3">
-        <ul class="list-group">
-            <li *ngFor="let c of catagories$ | async " 
-            routerLink="/"
-            [queryParams]="{catagory: c.key}"
-            class="list-group-item">{{c.name}}</li>
-        </ul>
+      <product-filter [catagory]="catagory"></product-filter>
     </div>
     <div class="col">
         <div class="row">
             <ng-container 
-            *ngFor="let p of products$ | async; let i =index"
-            class="card" style="width: 15rem;">
+            *ngFor="let p of filterProducts let i =index">
                <div class="col">
-                 <img src="{{p.imageUrl}}" class="card-img-top" alt="{{p.title}}">
-                 <div class="card-body">
-                   <h5 class="card-title">{{p.title}}</h5>
-                   <p class="card-text">{{p.price | currency:'USD':true}}</p>
-                   <a href="#" class="btn btn-primary">Add to cart</a>
-                 </div>
+                  <product-card [product]="p"></product-card>
                </div>
                <div *ngIf="(i+1) %2===0" class="w-100"></div>
           </ng-container>

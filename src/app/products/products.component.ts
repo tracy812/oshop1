@@ -1,7 +1,9 @@
-import { CatagoryService } from './../catagory.service';
+
 import { ProductService } from './../product.service';
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
+import { ThrowStmt } from '@angular/compiler';
+import "rxjs/add/operator/switchMap"
 
 @Component({
   selector: 'app-products',
@@ -10,16 +12,30 @@ import { map } from 'rxjs/operators';
 })
 export class ProductsComponent implements OnInit {
 
-  products$;
-  catagories$;
-  constructor(productService: ProductService, catagaoryService: CatagoryService) { 
-    this.products$= productService.getAll().snapshotChanges()
-    .pipe(map(changes => changes
-    .map(c => ({ key: c.payload.key, ...c.payload.val() }))));
+  products:any[];
+  filterProducts:any[];
+  catagory: string;
+  constructor(route: ActivatedRoute, productService: ProductService) { 
+   
+    productService.getAll().snapshotChanges().switchMap(
+      p=>{
+        p=p.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+        this.products=p;
+        return route.queryParamMap;})
+       .subscribe(params=>
+      {this.catagory= params.get('catagory');
+      this.filterProducts= (this.catagory)?
+        this.products.filter(p =>p.catagory===this.catagory):
+        this.products;
+      })
+  
+  
     
-    this.catagories$= catagaoryService.getAll().snapshotChanges()
-    .pipe(map(changes => changes
-    .map(c => ({ key: c.payload.key, ...c.payload.val() }))));
+    
+    
+
+    
+
   }
 
   ngOnInit(): void {
